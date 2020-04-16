@@ -1,3 +1,4 @@
 markdown: kramdown
 baseurl: /environment
 exclude: ['README.md']
+future: True

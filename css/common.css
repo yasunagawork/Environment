@@ -1,0 +1,365 @@
+/*###################################
+###############common################
+###################################*/
+
+
+html{
+	margin: 0;
+	padding: 0;
+	background-color: #A8A836;
+
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 100%/1.4;
+	color: #000000;
+	margin-left: 0px;
+}
+
+body{
+	margin: 0;	
+}
+
+
+
+li {
+	list-style-type: none;
+}
+
+
+a:link {
+  color: #000000;
+}
+
+/* visited link */
+a:visited {
+  color: #000000;
+}
+
+/* mouse over link */
+a:hover {
+  color: blue;
+}
+
+
+span { font-size: 0.5em; }
+
+
+h1{
+	font-family: 'IBM Plex Mono', monospace;
+	color: #000000;
+	font-size:1.6em;
+	margin-top:10px;
+	
+}
+
+h2{
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 1.4em;
+	color: #000000;
+	font-weight: normal;
+	margin-top:10px;
+}
+h3{
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 1.2em;
+	color: #000000;
+	font-weight: normal;
+	margin-bottom:2px;
+
+}
+
+h4{
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 0.8em;
+	color: #000000;
+	font-weight: normal;
+	
+}
+
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+}
+
+
+.table{
+	display: inline-block;
+	
+}
+
+pre {
+	background: gray;
+	 padding: 15px;
+}
+
+
+
+
+
+
+
+/*###################################
+###############boxes#################
+###################################*/
+
+
+#container {
+	max-width: 1200px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-right: 0;
+	padding-left: 0;
+  	text-align: center;
+  	background-color:#A8A836;
+  	}
+
+#container ul{
+	margin:0;
+	padding:0; 
+}
+
+#contentbox{
+	margin: 0 auto;
+	max-width:800px;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	text-align: left;
+	background-color:#A8A836;
+}
+
+#contentbox p{
+	text-align: left;
+}
+
+#contentbox_center{
+	margin: 0 auto;
+	max-width:800px;
+	
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	text-align: center;
+	background-color:#A8A836;
+}
+
+#textbox{
+	/*margin: 0 auto;*/
+	max-width: 700px;
+	padding-right: 20px;
+	padding-left: 20px;
+}
+
+#textbox2{
+	margin: 0 auto;
+	max-width: 650px;
+	padding-right: 20px;
+	padding-left: 20px;
+	text-align: center;
+}
+
+
+
+
+/*###################################
+############side navigation##########
+###################################*/
+
+
+.leftmenu {
+  background-color: #A8A836;
+  float:left;
+  width:25%;
+}
+
+.leftmenu h1, h3, ul, li{
+	padding-left:10px;
+}
+
+.main {
+  background-color:#f1f1f1;
+  padding:20px;
+  float:left;
+  width:75%; /* The width is 60%, by default */
+
+}
+
+
+
+
+
+
+/*###################################
+############floating box#############
+###################################*/
+
+
+
+.animalbox{
+
+	margin-left: 5px;	
+	margin-right: 5px;	
+	margin-top:10px;	
+	margin-bottom:10px;
+	background-color:#D3F99A;
+	text-decoration: none;
+	text-align: center;
+	width: 300px;
+	/*height:420px;*/
+	
+
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.animalbox li{
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+
+
+.anotheranimalbox{
+	
+	margin-left:10px;
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+
+
+
+
+/*###################################
+##########image and video############
+###################################*/
+
+
+
+.dataimage{
+	margin: 0 auto;
+	max-width: 600px;
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.dataimage2{
+	
+
+	max-width: 300px;
+	text-align: left;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+
+
+}
+
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+
+
+
+
+/*###################################
+#############footer##################
+###################################*/
+
+
+footer {
+	text-align: center;
+	background-color: #FFFF00;
+}
+
+.foottext {
+	padding-top: 10px;
+	padding-bottom: 30px;
+	margin:0 auto;
+	font-family: 'IBM Plex Mono', monospace;
+	font-size: 0.9em;
+	
+	font-weight: thin;
+	width:300px;
+
+
+}
+
+
+
+
+
+
+/*###################################
+#############scrollbar###############
+###################################*/
+
+
+
+::-webkit-scrollbar {
+    width: 60px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 10 10 10px gray; 
+    border-radius: 0px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background:#000000; 
+    border-radius: 0px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #fff2d8; 
+}
+
+
+
+
+
+/*###################################
+###############responsive############
+###################################*/
+
+* {
+  box-sizing:border-box;
+}
+
+
+@media screen and (max-width: 700px) {
+  .leftmenu, .main{
+    width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+  }
+  .leftmenu{
+    text-align: center;
+    padding-right:15px;
+  }
+}
+
+
+
+
+
+

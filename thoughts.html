@@ -1,0 +1,15 @@
+---
+layout: articles
+---
+
+<h2>Thoughts</h2>
+
+<ul>
+	{% for article in site.categories.me_thinking %}
+	<li>
+		<a href="">{{article.title}}</a><br> {{article.discription}}<br><br>
+		
+	</li>
+	{% endfor %}
+
+</ul>

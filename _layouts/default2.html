@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>{% if page.title %}{{page.title}} · {% endif %} Environment</title>
+	<link href="{{site.baseurl}}/css/main.css" rel="stylesheet">
+	<link rel="icon" href="{{site.baseurl}}/assets/img/sun.png">
+	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0;">
+	<meta name="keywords" content="Electronic Entomology, electronicentomology, electronic bugs, electronic insects, Lucas Yasunaga, Lucas Haroldsen, BEAM robotics, robot, electronics, environment, experimental music, noise music, musical ecosystem, ecosystem">
+	<meta name = "description" contnet="Electronic entomology is a study of electronic insects. It is a research and evolutional archival project that looks close to the nuances of behaviors and characteristics of satellite senses that help us imagine an invisible energy flow of the world.">
+	<meta name="author" content="Lucas Yasunaga">
+
+
+</head>
+
+
+
+<body>
+
+
+
+	<header class= "masthead {{page.mastheadClass}}">
+		<h1> <strong> Environmnet</strong> <br><span>playground for musical ecosystem</span></h1>
+
+		{% include nav.html navclass = 'nav-top' %}	
+	</header>
+
+
+	
+
+
+	{{content}}
+
+	
+
+
+<footer>
+	{% include nav.html navclass = 'nav-bottom' %}
+	<div class="foottext"> 2020 Lucas Yasunaga</div>
+	
+</footer> 
+
+</body>
+</html>

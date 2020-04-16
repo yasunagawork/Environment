@@ -1,0 +1,40 @@
+---
+layout: default
+title: Library
+---
+
+
+<div id="contentbox">
+
+
+<h1>Library</h1>
+
+
+<ul>
+	{% for texts in site.data.texts %}
+	<p>
+		{% if shows.image %}
+		<div class="dataimage2">
+		<img src="{{site.baseurl}}/assets/img/library/{{texts.image}}" align="center" width="100%"></a>
+	    </div>
+		 {% endif %}
+		
+     <h3><a href="{{texts.link}}">{{texts.title}}</a> </h3>
+
+	<li>
+		 By {{texts.auther}}
+	</li>
+	<li>{{texts.description}}</li>
+
+
+	  
+	</p>
+	
+	{% endfor %}
+
+
+</ul>
+
+
+
+</div>

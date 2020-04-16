@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<div id="contentbox">
+<div id="textbox">
+
+<h1>Articles</h1>
+
+<nav>
+	<ul class= "nav-sub">
+		<li><a href="{{site.baseurl}}/documentation.html" class="{% if page.url contains 'documentation' %}current_sub{% endif %}">Documentation</a></li>
+	
+		<li><a href="{{site.baseurl}}/thoughts.html" class="{% if page.url contains 'thoughts' %}current_sub{% endif %}">Thoughts</a></li>
+		
+	</ul>
+</nav>
+
+
+{{content}}
+
+
+</div>
+</div>

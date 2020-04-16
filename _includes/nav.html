@@ -1,0 +1,16 @@
+<nav>
+		<ul class= "nav {{include.navclass}}">
+			<li><a href="{{site.baseurl}}/" class="{% if page.url == '/' %}current{% endif %}"> Home</a></li>
+			<li><a href="{{site.baseurl}}/preface/" class="{% if page.url contains 'preface' %}current{% endif %}">Preface</a></li>
+			<li><a href="{{site.baseurl}}/news/" class="{% if page.url contains 'news' %}current{% endif %}"> News</a></li>
+			<li><a href="{{site.baseurl}}/family/" class="{% if page.url contains 'family' %}current{% endif %}"> Family</a></li>
+
+			<!-- <li><a href="{{site.baseurl}}/documentation/" class="{% if page.url contains 'documentation' or page.url contains 'thoughts' %}current{% endif %}"> Articles</a></li> -->
+			
+			<li><a href="{{site.baseurl}}/resource/" class="{% if page.url contains 'resource' %}current{% endif %}"> Resource</a></li>
+
+			<li><a href="{{site.baseurl}}/library/" class="{% if page.url contains 'library' %}current{% endif %}"> Library</a></li>
+			
+			<li><a href="{{site.baseurl}}/connect/" class="{% if page.url contains 'connect' %}current{% endif %}">Connect</a></li>
+		</ul>
+</nav>

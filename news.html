@@ -1,0 +1,36 @@
+---
+layout: default
+title: News
+---
+
+
+<div id="contentbox">
+
+
+<h1>News</h1>
+
+<ul>
+	{% for shows in site.data.shows %}
+	<p>
+		{% if shows.image %}
+		<div class="dataimage2">
+		<img src="{{site.baseurl}}/assets/img/shows/{{shows.image}}" align="center" width="100%"></a>
+	    </div>
+		 {% endif %}
+		 
+		
+	<li>
+		<strong>{{shows.location}}</strong>  {{shows.date}}<br>{{shows.content}}
+	</li>
+	  
+	</p>
+	
+    <br>
+	{% endfor %}
+
+
+</ul>
+
+
+
+</div>

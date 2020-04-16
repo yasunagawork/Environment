@@ -1,0 +1,44 @@
+
+
+<!-- <ul> -->
+
+
+		{% for animal in site.pages %}
+		  	{% if animal.show == include.show %}
+		  	   
+
+		  	
+
+		  		<div class="animalbox">
+
+		  		<div class="anotheranimalbox">
+
+		  
+
+				<li>
+					<a href="{{site.baseurl}}{{animal.url}}">
+
+					{{animal.title}}</a>
+
+					
+					<br><br>
+
+					<a href="{{site.baseurl}}{{animal.url}}">
+					<img src="{{site.baseurl}}/assets/img/animals/{{animal.title}}/{{animal.image_thumb}}" alt="photograph of {{animal.title}}" width= "280px" style="padding-bottom: 10px"></a>
+					
+
+					
+
+				</li>
+
+			   </div>
+
+			   </div>
+				
+
+
+			  
+			{% endif %}
+		{% endfor %}
+	<!-- </ul> -->
+

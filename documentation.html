@@ -1,0 +1,15 @@
+---
+layout: articles
+---
+
+<h2>Documentation</h2>
+
+<ul>
+	{% for article in site.categories.documentation %}
+	<li>
+		<a href="{{site.baseurl}}{{article.url}}">{{article.title}}</a><br> {{article.discription}}<br><br>
+		
+	</li>
+	{% endfor %}
+
+</ul>

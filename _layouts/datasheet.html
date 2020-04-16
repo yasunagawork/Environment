@@ -1,0 +1,81 @@
+---
+layout: default
+
+---
+
+ 
+
+<div id="contentbox_center">
+
+<h1> {{ page.title }} </h1>
+
+
+<div class="dataimage">
+
+<a href="{{site.baseurl}}/assets/img/animals/{{page.title}}/{{page.image}}" alt="Photograph of {{page.title}}">
+
+<img src="{{site.baseurl}}/assets/img/animals/{{page.title}}/{{page.image}}" alt="Photograph of {{page.title}}" align="center" width="100%"></a> <br> 
+
+</div>
+
+<br>
+
+
+
+{{content}}
+
+
+<br><br>
+
+{% if page.image2 %}
+
+<div class="dataimage">
+
+<a href="{{site.baseurl}}/assets/img/bugs/{{page.title}}/{{page.image2}}" alt="schimatic of {{page.title}}">
+<img src="{{site.baseurl}}/assets/img/bugs/{{page.title}}/{{page.image2}}" alt="Schimatic of {{page.title}}" align="center" width="100%"></a> <br> 
+</div>
+{% endif %}
+
+
+
+
+{% if page.image_schm %}
+<h3>schimatic</h3>
+<div class="dataimage">
+
+<a href="{{site.baseurl}}/assets/img/bugs/{{page.title}}/{{page.image_schm}}" alt="schimatic of {{page.title}}">
+<img src="{{site.baseurl}}/assets/img/bugs/{{page.title}}/{{page.image_schm}}" alt="Schimatic of {{page.title}}" align="center" width="100%"></a> <br> 
+</div>
+{% endif %}
+
+
+
+
+{% if page.image_wire %}
+<div class="dataimage">
+<h3>wiring</h3>
+<a href="{{site.baseurl}}/assets/img/bugs/{{page.title}}/{{page.image_wire}}" alt="schimatic of {{page.title}}">
+<img src="{{site.baseurl}}/assets/img/bugs/{{page.title}}/{{page.image_wire}}" alt="Schimatic of {{page.title}}" align="center" width="100%"></a> <br> 
+</div>
+{% endif %}
+
+<br>
+<br>
+
+{% if page.video %}
+
+<h3>sample video</h3>
+<div id="textbox2">
+ <div class="videoWrapper">
+
+<iframe width="560" height="315" src="{{page.video}}?rel=0&amp;controls=1&amp;showinfo=0&amp;modestbranding=1"></iframe>
+</div>
+</div>
+{% endif %}
+
+
+
+</div> 
+</div>
+
+<br><br>

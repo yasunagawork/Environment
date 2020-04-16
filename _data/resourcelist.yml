@@ -1,0 +1,35 @@
+toc2:
+  - title: Design
+    subfolderitems:
+      - page: the garden - the ground
+        url: /show/2020/01/03/performanceshow.html
+      - page: Piezo
+        url: /thing2.html
+        subsubfolderitems:
+          - page: Subthing 1
+            url: /subthing1.html
+          - page: Subthing 2
+            url: /subthing2.html
+      - page: Thing 3
+        url: /thing3.html
+
+  - title: PCB
+    subfolderitems:
+      - page: Pre-Amp
+        url: /resource/2020/01/04/newfamily.html
+      - page: LM317 variable voltage
+        url: /piece2.html
+      - page: wind sensor
+        url: /piece3.html
+
+ 
+  - title: ATtiny85
+    subfolderitems:
+      - page: Why AVR?
+        url: /resource/2020/03/24/why.html
+      - page: 1.Setup and Introduction
+        url: /resource/2020/03/25/setupandintro.html
+      - page: 2.First Program
+        url: /resource/2020/03/26/firstprogram.html
+      - page: AVR cheat sheet
+        url: /resource/2020/12/31/cheat.html
