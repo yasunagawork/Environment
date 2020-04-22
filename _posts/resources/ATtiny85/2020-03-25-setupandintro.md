@@ -10,8 +10,17 @@ tag: attiny85
 This series of resource will document my process of learning how to work with AVR. In this section, I will go over what I have done for the settting up my workflow and the toolchain for the experiments. There are many delails that I forget and also still unclear so I figured I should record it here so I can identify what I tryied and what I don't understand. I am following this book, [AVR Programming from MAKE by Elliot Williams](https://www.oreilly.com/library/view/make-avr-programming/9781449356484/). 
 [Here](https://github.com/hexagon5un/AVR-Programming) is the link for the example files provided by the book. 
 
+---
 
-## A.Toolchain
+Steps:
+
+- [A. Toolchain](#tools)
+- [B. ATtiny85](#attiny85)
+- [C. Wiring and Connecting](#wiring)
+- [D. CrossPack and Initialization](#crosspack)
+
+---
+## A.Toolchain <a name="tools"></a>
 
 Toolchain for working with AVR is as follows:
 
@@ -24,8 +33,11 @@ Toolchain for working with AVR is as follows:
 - <mark>Flash Programmer</mark> is a hardware that is a bridge between the computer and AVR. Flash Programmer send the information (compiled machine code) to the AVR's flash memory where they store. I am using this cute flash programmer called [AVR Pocket Programmer](https://learn.sparkfun.com/tutorials/pocket-avr-programmer-hookup-guide/all) from Sparkfun. We program AVR with SPI (serial prepheral interface) more on that [here](https://learn.sparkfun.com/tutorials/pocket-avr-programmer-hookup-guide/all)
 
 
+---
 
-## B.ATtiny85  -- [datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf)
+## B.ATtiny85  <a name="attiny85"></a> 
+
+[datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf)
 
 <div class="dataimage2">
 	<img src="{{site.baseurl}}/assets/img/resource/attiny85/attinychip.jpg">
@@ -46,7 +58,9 @@ Above is the pinout for the ATtiny85 referencing the datasheet. There are 8 pins
 Port is a group of pins that can be configured for input and output. There are different port like PortC and D on other microcontroller with more physical pins. PB0 to PB5 has other functions that we can access listed on the pin out image. I don't know what all of these mean for now but I'm assuming it will be clear as they are needed.
 
 
-## C. Wiring and Connecting
+---
+
+## C. Wiring and Connecting <a name="wiring"></a>
 
 Now it's a time to connect flash programmer to the ATtiny. The guide in [sparkfun website](https://learn.sparkfun.com/tutorials/pocket-avr-programmer-hookup-guide/all) provide good walkthough of how this things works and what we need to look out for.
 
@@ -78,7 +92,9 @@ Here is what it looks like connected to ATtiny85 (ISP connector view from above)
 	<img src="{{site.baseurl}}/assets/img/resource/attiny85/wiringisp.png">
 </div>
 
-## D. CrossPack and Initialization
+---
+
+## D. CrossPack and Initialization <a name="crosspack"></a>
 
 Once you got the CrossPack installed, you can create the directory for your projects. Follow [Getting Started](file:///usr/local/CrossPack-AVR-20131216/manual/gettingstarted.html). Once you made the directory for the projects, you can create the project with a template by typing "avr-project nameOfProject" in the terminal.
 Now there are two file created in the project folder.

@@ -7,7 +7,18 @@ tag: attiny85
 
 ---
 
-## A.Configuring Makefile
+Steps:
+
+- [A. Configuring Makefile](#makefile)
+- [B. make flash](#makeflash)
+- [C. Code](#code)
+- [D. DDRB and PORTB](#ddrbandportb)
+
+---
+
+
+
+## A.Configuring Makefile <a name="makefile"></a>
 
 Before we can send our test program to AVR, we need to cinfigure the Makefile to specific situations we are in. Makefile is a file that will contains spesification of our project that give instructions to the compiler. So when we translate our code from C to machine code, Makefile will bring together all the library files we reference and put it together according to our project specification. So we have to change Makefile for every project and configure them. 
 
@@ -37,7 +48,9 @@ Only thing that is important in my setting is here
 Basically my setting is intirely a default setting when you select attiny85 in a dropdown menu. You can select a clock setting from the dropdown menu to configure your AVR to run in defferent speed but it is important note there are internal clock and external clock. ATtiny has a internal clock that runs 8MHz on a default that everything is referensing. If you set to reference external clock, you have to have another component to keep time.
 Important thing here is that in the setting I have, section for "devide clock by 8 internally" is checked. This means that internal clock 8 Mhz is devided by 8 which is 1Mhz. This is why I have my CLOCK setting in the Makefile to 1000000 (1MHz).
 
-## B. make flash
+---
+
+## B. make flash <a name="makeflash"></a>
 
 Now we are ready to send the code to the ATtiny! First I will make sure that process will work so I will try to send an empty example code to the chip. Main C code is stored in main.c file. From the terminal window cd into your directory of the firmware file of your project (wherever you have your project stored)
 
@@ -69,8 +82,10 @@ If everyting goes well, 3 more files are created in the firmware folder
 
 Now we can move on to actually writing a code!
 
+---
 
-## C. Code
+
+## C. Code <a name= "code"></a>
 
 The structure of code for microcontrollers is described in a book as this:
 
@@ -112,8 +127,15 @@ I really wish there is a way to color sections of code so it is easier to see an
 And here is the first blinking LED sketch
 
 
+<div class="gist">
+<script src="https://gist-it.appspot.com/github.com/lucasharoldsen/AVR/blob/master/1_digitalOutput_bitTwidling/blink/firmware/main.c"></script>
+</div>
 
-## D. DDRB and PORTB
+---
+
+
+## D. DDRB and PORTB <a name="ddrbandportb"></a>
+
 
 It took me a little bit to concepturalize the relationship between pins on the chips, ports, and bi
 

@@ -1,16 +1,13 @@
 toc2:
-  - title: Design
+  - title: Design and Ideas
     subfolderitems:
       - page: the garden - the ground
-        url: /show/2020/01/03/performanceshow.html
+        url: /design/2020/04/22/ground.html
       - page: Piezo
         url: /thing2.html
-        subsubfolderitems:
-          - page: Subthing 1
-            url: /subthing1.html
-          - page: Subthing 2
-            url: /subthing2.html
-      - page: Thing 3
+      - page: The mixer
+        url: /thing3.html
+      - page: Instrunment for play
         url: /thing3.html
 
   - title: PCB
@@ -31,5 +28,11 @@ toc2:
         url: /resource/2020/03/25/setupandintro.html
       - page: 2.First Program
         url: /resource/2020/03/26/firstprogram.html
+      - page: 3.Bit Twidling
+        url: /resource/2020/04/10/bittwidling.html
+      - page: 4.Digital Input
+        url: /resource/2020/04/12/digitalinput.html
       - page: AVR cheat sheet
-        url: /resource/2020/12/31/cheat.html
+        url: /resource/2020/12/30/cheat.html
+      - page: links
+        url: /resource/2020/12/31/links.html
