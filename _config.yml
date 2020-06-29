@@ -1,6 +1,6 @@
 markdown: kramdown
 exclude: ['README.md']
 future: True
-url: 'https://yasunagawork.github.io/Environment'
+url: 'https://github.com/yasunagawork/Environment'
 baseurl: /
 permalink: pretty
