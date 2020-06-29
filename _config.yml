@@ -1,4 +1,4 @@
 markdown: kramdown
-baseurl: https://yasunagawork.github.io/environment
+baseurl: https://yasunagawork.github.io/Environment/
 exclude: ['README.md']
 future: True
