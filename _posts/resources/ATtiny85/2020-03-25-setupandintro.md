@@ -125,7 +125,9 @@ This will initialize the AVR and get them to be ready to recive the code. It wil
 </div>
 
 If everything is good it will say "thank you."
-Conitnue to next step for flashing the first program-->
+
+Conitnue to next step to -->> [flashing the first program](/resource/2020/03/26/firstprogram.html)
+
 
 
 

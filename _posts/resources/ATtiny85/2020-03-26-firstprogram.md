@@ -13,6 +13,7 @@ Steps:
 - [B. make flash](#makeflash)
 - [C. Code](#code)
 - [D. DDRB and PORTB](#ddrbandportb)
+- [E. Conclusion](#conclusion)
 
 ---
 
@@ -69,7 +70,22 @@ If everyting goes well, 3 more files are created in the firmware folder
 	<img src="{{site.baseurl}}/assets/img/resource/attiny85/firmwarefile.png">
 </div>
  
- I am not sure what do main.o and main.elf do, but from reading the feedback from AVRDUDE when I ran "make flash" command, we can see the steps of operation below,
+As I understand, .o (object) file and .elm file is what my C code is being translated to and compiler does one more step of translation to create a .hex file which gets read by the AVR. [Here](https://ccrma.stanford.edu/~juanig/articles/wiriavrlib/AVR_GCC.html) is a wright up on this.
+
+Here is what the .hex file of blink sketch looks like:
+
+<pre>
+:100000000EC015C014C013C012C011C010C00FC064
+:100010000EC00DC00CC00BC00AC009C008C011241E
+:100020001FBECFE5D2E0DEBFCDBF02D018C0E8CF03
+:10003000BB9A88E088BB2FE936E891E02150304038
+:100040009040E1F700C0000018BA2FE936E891E0CF
+:10005000215030409040E1F700C00000EBCFF89411
+:02006000FFCFD0
+:00000001FF
+</pre>
+
+ From reading the feedback from AVRDUDE when I ran "make flash" command, we can see the steps of operation below,
 
  - 1- avr-gcc translate the main.c file 
  - 2- check the size of the program
@@ -136,9 +152,80 @@ And here is the first blinking LED sketch
 
 ## D. DDRB and PORTB <a name="ddrbandportb"></a>
 
+It took me a little bit to concepturalize the relationship between physical pins on the chips, ports and idea of registers. Here are some key points. It was easier for me to think about these concepts on a ATmega328p chip since it had more than a one banks.
 
-It took me a little bit to concepturalize the relationship between pins on the chips, ports, and bi
+### Bank of Pins
+On microcontrollers there are "banks of pins" (ex. PORTB, PORTC, PORTD) they are group of pins in 8 (not always) that have a name like PB0 ~ PB7 (PB0 being first pin in PORTB and PB7 being 8th pin on the PORTB) These pins are physically located in a chip. For instance, on ATmega328p
 
+<div class="dataimage2">
+	<img src="{{site.baseurl}}/assets/img/resource/attiny85/bank_atmega328.png">
+</div>
+
+you can see that banks of pins are placed on different location of pins. So here PB2 is located on pin 16 on the chip. In a code you refer to PB2 to use the pin. In ATtiny85, the package is so small that we only have one bank of pins PORTB. PB2 is located on pin 7 on ATtiny85. 
+
+<div class="dataimage2">
+	<img src="{{site.baseurl}}/assets/img/resource/attiny85/pinout_portb.png">
+</div>
+
+
+### DDRB (Data Direction Register Bank B)
+
+DDRB was in the example code above in the initialization section. This is short for Data Direction Register Bank B. So if you were trying to use bank C it would be DDRC. In a CPU of microcontroller there are place called registers where small amounts of space of memory is dedicated for configuring the body or conducting a specific operation. Data Direction Register is a reister in a microcontroller that can configure the specified pins to be used for INPUT or OUTPUT. By the default, they are configured to be INPUT to to use them as an output, we have to tell microcontroller that we want to do so. 
+
+It is just like pinMode() in Arduino code. We are preparing the pin we are about to use.
+
+The way to set a bit in a register is a another conceptural leap but fascinating. First if we look at the datasheet of ATtiny85, we can find Register Description on page 64. Here we can find which bit correspond to which pin of the bank. There are 8 bit on a register and each bit is turned high and low with transistors. By writing high of the corresponding redister bit, we can configure specific pin for the output. 
+
+<pre>
+DDRB
+
+ bit7  bit6  bit5  bit4  bit3  bit2  bit1  bit0 
+
+| PB7 | PB6 | PB5 | PB4 | PB3 | PB2 | PB1 | PB0 |
+
+</pre>
+
+So if we want to configure PB3 (pin 7 on a chip) to the output, we can write,
+
+<pre>DDRB = 0b00001000</pre>
+
+First 0b indicates that what follows is a binary number, and 00001000 is what we write. We are writing High (1) to the 4th bit from the right (bit3, PB3) mirroing the register description above. One thing to note here is that because we are writing whole 8 bit to the register, we are also writing low on all the other pins. It is fine for this project since we are only using one pin but as proect gets more complicated we need a way to flip the bit we want with out disturbing other bits. 
+
+[Here is a great article on bit manipulation](http://www.rjhcoding.com/avrc-bit-manip.php)
+
+Instead of writing whole 8 bit, I shifted the bit in using OR operation.
+
+<pre>
+DDRB = 0b00001000  
+
+becomes,
+
+DDRB |= (1 << PB3)
+</pre>
+
+### PORTB (Port B Data Register)
+
+Now that we have configured our pin for output, we can send the voltage out by writing to PORTB. It works in a same way as DDRB that we can just write a bit high for the corresponding pin we are using. 
+
+<pre>
+PORTB |= (1 << PB3) // same as PORTB = 0b00001000
+</pre>
+
+This turns PB3 high.
+
+<pre>
+PORTB &= ~(1 << PB3) 
+</pre>
+
+And this turns the bit off. 
+
+[Here is more in depth article on port manipulation](https://www.instructables.com/id/ATTiny-Port-Manipulation/)
+
+---
+
+## E. Conclusion <a name="conclusion"></a>
+
+Up to this point code structure and idea somewhat resemble Arduino structure I know. I can see how things are packaged to be more legible and clearer. Although, undrstanding register and writing to the register really make the programming alot closer to the feeling of physically turning transistor in the microcontroller on and off. Way microcontroller deals with bit manipulation make the process feel alot more granural. 
 
 
 

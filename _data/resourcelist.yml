@@ -1,7 +1,14 @@
 toc2:
   - title: Design and Ideas
     subfolderitems:
+
+      - page: the word "Environment"
+        url: /design/2020/04/22/ground.html
+      - page: ecosystem
+        url: /design/2020/04/22/ground.html
       - page: the garden - the ground
+        url: /design/2020/04/22/ground.html
+      - page: instrunment and player
         url: /design/2020/04/22/ground.html
       - page: Piezo
         url: /thing2.html
@@ -20,7 +27,7 @@ toc2:
         url: /piece3.html
 
  
-  - title: ATtiny85
+  - title: Learning ATtiny85
     subfolderitems:
       - page: Why AVR?
         url: /resource/2020/03/24/why.html
@@ -34,5 +41,14 @@ toc2:
         url: /resource/2020/04/12/digitalinput.html
       - page: AVR cheat sheet
         url: /resource/2020/12/30/cheat.html
-      - page: links
+      - page: links for AVR
         url: /resource/2020/12/31/links.html
+
+  - title: Learning ATmega328p
+    subfolderitems:
+      - page: 1. Serial Communication via FTDI cable
+        url: /resource/2020/03/24/why.html
+      # - page: 1.Setup and Introduction
+      #   url: /resource/2020/03/25/setupandintro.html
+      # - page: 2.First Program
+      #   url: /resource/2020/03/26/firstprogram.html

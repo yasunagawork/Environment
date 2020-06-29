@@ -92,7 +92,7 @@ th, td {
 }
 
 pre {
-	background: gray;
+	
 	 padding: 15px;
 }
 
@@ -259,11 +259,12 @@ pre {
 
 .dataimage2{
 	
-
-	max-width: 300px;
+   
+	max-width: 100%;
 	text-align: left;
 	padding-left: 10px;
 	padding-right: 10px;
+	overflow: scroll;
 }
 
 
@@ -342,6 +343,9 @@ footer {
     background: #fff2d8; 
 }
 
+::-webkit-scrollbar-corner { 
+	background: #f1f1f1; 
+}
 
 
 
