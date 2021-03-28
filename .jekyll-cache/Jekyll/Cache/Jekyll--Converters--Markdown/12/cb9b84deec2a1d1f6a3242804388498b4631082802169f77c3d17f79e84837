@@ -1,0 +1,144 @@
+I"�<p>This series of resource will document my process of learning how to work with AVR. In this section, I will go over what I have done for the settting up my workflow and the toolchain for the experiments. There are many delails that I forget and also still unclear so I figured I should record it here so I can identify what I tryied and what I don’t understand. I am following this book, <a href="https://www.oreilly.com/library/view/make-avr-programming/9781449356484/">AVR Programming from MAKE by Elliot Williams</a>. 
+<a href="https://github.com/hexagon5un/AVR-Programming">Here</a> is the link for the example files provided by the book.</p>
+
+<hr />
+
+<p>Steps:</p>
+
+<ul>
+  <li><a href="#tools">A. Toolchain</a></li>
+  <li><a href="#attiny85">B. ATtiny85</a></li>
+  <li><a href="#wiring">C. Wiring and Connecting</a></li>
+  <li><a href="#crosspack">D. CrossPack and Initialization</a></li>
+</ul>
+
+<hr />
+<h2 id="atoolchain-">A.Toolchain <a name="tools"></a></h2>
+
+<p>Toolchain for working with AVR is as follows:</p>
+
+<ul>
+  <li>
+    <p>text editor   »   compilor   »   flash programmer   »   AVR</p>
+  </li>
+  <li>
+    <p><mark>Text editor</mark> is where we write our idea into code. Folloing the book, I will be writing C. I am using <a href="https://www.sublimetext.com/">SublimeText</a> since it is something I am used to.</p>
+  </li>
+  <li>
+    <p><mark>Compiler</mark> is where we turn human-readable C code into machine code for the AVR. Compiler I am using here is called avr-gcc that is included in a AVR developing environment (like WinAVR for Windows) for OSX called <a href="https://www.obdev.at/products/crosspack/index.html">CrossPack</a> — user manual <a href="file:///usr/local/CrossPack-AVR-20131216/manual/index.html">here</a> CrossPack also contains AVRDUDE which is a software for reading and writing to the chip through the programmer.</p>
+  </li>
+  <li>
+    <p><mark>Flash Programmer</mark> is a hardware that is a bridge between the computer and AVR. Flash Programmer send the information (compiled machine code) to the AVR’s flash memory where they store. I am using this cute flash programmer called <a href="https://learn.sparkfun.com/tutorials/pocket-avr-programmer-hookup-guide/all">AVR Pocket Programmer</a> from Sparkfun. We program AVR with SPI (serial prepheral interface) more on that <a href="https://learn.sparkfun.com/tutorials/pocket-avr-programmer-hookup-guide/all">here</a></p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="battiny85--">B.ATtiny85  <a name="attiny85"></a></h2>
+
+<p><a href="http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf">datasheet</a></p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/attinychip.jpg" />
+</div>
+
+<p>I am using ATtiny85 for the experiments. ATtiny is a series of 8 bit microcontroller (meaning it process 8 bits of information at time). It is similar to the 8 bit microcontroller used in Arduino Uno <a href="https://www.microchip.com/wwwproducts/en/ATmega328P">atmega328p</a>. ATtinys are small in a family of the AVR mictocontrollers interms of amount of program memoory, number of available pins and functionality but they can be operated in a low power setup like solarcells. They are also very cheap ($1.20 each) and can be purchesed at <a href="https://www.digikey.com/product-detail/en/microchip-technology/ATTINY85-20PU/ATTINY85-20PU-ND/735469">Digikey</a> They can function in a low voltage as low as 2.7V though ATtiny85V-10PU can operate in a voltage as low as 1.8V which is great for solar power application.</p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/pinout.png" />
+</div>
+
+<p>Above is the pinout for the ATtiny85 referencing the datasheet. There are 8 pins.</p>
+<ul>
+  <li>Pin 8 is VCC (3.3-5V)</li>
+  <li>Pin 4 is Ground</li>
+  <li>the rest is PB0 to PB5(PortB 0 to PortB 5).</li>
+  <li>Pin 1 (PB5) is also a RESET pin</li>
+</ul>
+
+<p>Port is a group of pins that can be configured for input and output. There are different port like PortC and D on other microcontroller with more physical pins. PB0 to PB5 has other functions that we can access listed on the pin out image. I don’t know what all of these mean for now but I’m assuming it will be clear as they are needed.</p>
+
+<hr />
+
+<h2 id="c-wiring-and-connecting-">C. Wiring and Connecting <a name="wiring"></a></h2>
+
+<p>Now it’s a time to connect flash programmer to the ATtiny. The guide in <a href="https://learn.sparkfun.com/tutorials/pocket-avr-programmer-hookup-guide/all">sparkfun website</a> provide good walkthough of how this things works and what we need to look out for.</p>
+
+<p>1.First, we have to check if we will be powering the chip through the flashprogrammer. There is a tiny switch to select wheather or not I want to power the AVR with the programmer. If there is a power provided from other powersource while AVR is programmed, I will turn this switch to “no power”. In my experiments, I will be powering ATtiny with programmer so I set it to “power target”</p>
+
+<p>2.Now we wire up the ISP headers of programmer to the correcpond pins on ATtiny85. There are 6 wires required for communication:</p>
+
+<ul>
+  <li>VCC (power)</li>
+  <li>GND (ground)</li>
+  <li>Reset</li>
+  <li>MOSI (master out slave in —— aka parent out child in)</li>
+  <li>MISO (master in slave out —— aka parent in child out)</li>
+  <li>SCK (serial clock)</li>
+</ul>
+
+<p>You can find which pin on ATtiny85 corresponds to the pins on the programmer by referencing the datasheet pinout image.</p>
+
+<ul>
+  <li>Pin1 Reset</li>
+  <li>Pin2 —</li>
+  <li>Pin3 —</li>
+  <li>Pin4 GND</li>
+  <li>Pin5 MOSI</li>
+  <li>Pin6 MISO</li>
+  <li>Pin7 SCK</li>
+  <li>Pin8 VCC</li>
+</ul>
+
+<p>Here is what it looks like connected to ATtiny85 (ISP connector view from above)</p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/wiringisp.png" />
+</div>
+
+<hr />
+
+<h2 id="d-crosspack-and-initialization-">D. CrossPack and Initialization <a name="crosspack"></a></h2>
+
+<p>Once you got the CrossPack installed, you can create the directory for your projects. Follow <a href="file:///usr/local/CrossPack-AVR-20131216/manual/gettingstarted.html">Getting Started</a>. Once you made the directory for the projects, you can create the project with a template by typing “avr-project nameOfProject” in the terminal.
+Now there are two file created in the project folder.</p>
+
+<p>Project folder<br /></p>
+<ul>
+  <li>└──firmware
+    <ul>
+      <li>├── main.c<br /></li>
+      <li>└── Makefile</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Before we get into the coding, we want to make sure we can connect to the ATiny. We will be using AVRDUDE to communicate with the mictocontrollers. AVRDUDE is part of the CrossPacks package so if you have CrossPack installed you should already have them. You can check the presence of AVRDUDE by typing “avrdude” in terminal and it will give you your version and the options.</p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/avrdudeoption.png" />
+</div>
+
+<p><a href="https://www.ladyada.net/learn/avr/avrdude.html">Here</a> « is a good article/ tutorial from adafruit on command and use of AVRDUDE.</p>
+
+<p>Now you can type:</p>
+<ul>
+  <li>avrdude -p attiny85 -c usbtiny</li>
+  <li>-p spesifies your chip and -c specified your programmer</li>
+</ul>
+
+<p>This will initialize the AVR and get them to be ready to recive the code. It will also list out:</p>
+<ul>
+  <li>device signature</li>
+  <li>status of fuse</li>
+</ul>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/avrdudeinitial.png" />
+</div>
+
+<p>If everything is good it will say “thank you.”</p>
+
+<p>Conitnue to next step to –» <a href="/resource/2020/03/26/firstprogram.html">flashing the first program</a></p>
+
+:ET

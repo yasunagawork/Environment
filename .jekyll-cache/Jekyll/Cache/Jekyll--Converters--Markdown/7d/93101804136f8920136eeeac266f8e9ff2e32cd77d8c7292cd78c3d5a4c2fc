@@ -1,0 +1,221 @@
+I"�-<p>Steps:</p>
+
+<ul>
+  <li><a href="#makefile">A. Configuring Makefile</a></li>
+  <li><a href="#makeflash">B. make flash</a></li>
+  <li><a href="#code">C. Code</a></li>
+  <li><a href="#ddrbandportb">D. DDRB and PORTB</a></li>
+  <li><a href="#conclusion">E. Conclusion</a></li>
+</ul>
+
+<hr />
+
+<h2 id="aconfiguring-makefile-">A.Configuring Makefile <a name="makefile"></a></h2>
+
+<p>Before we can send our test program to AVR, we need to cinfigure the Makefile to specific situations we are in. Makefile is a file that will contains spesification of our project that give instructions to the compiler. So when we translate our code from C to machine code, Makefile will bring together all the library files we reference and put it together according to our project specification. So we have to change Makefile for every project and configure them.</p>
+
+<p>Since CrossPack provide a skleton of Makefile when we create a project. I am working from the CrossPack Makefile instead of one that was provided with the book. Here are a few things we have to change in the file:</p>
+
+<ul>
+  <li>DEVICE     –&gt; spesify the AVR device you compile for</li>
+  <li>CLOCK      –&gt; Target AVR clock rate in Hertz</li>
+  <li>PROGRAMMER –&gt; opptions for what programmer we are using</li>
+  <li>FUSES      –&gt; Fuse setting for configuring the AVR device (explained below)</li>
+</ul>
+
+<p>So my setting looks like this.</p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/makefileconfig1.png" />
+</div>
+
+<p>Fuses are bits in the chip that are reserved for cinfiguring the chip for the speed they run at and how they act. <a href="https://www.ladyada.net/learn/avr/fuses.html"> Here </a>« is another great article from adafruit on fuse setting in AVR.</p>
+
+<p>There are calculator online that helps us generate these values acording to our needs. I used <a href="http://eleccelerator.com/fusecalc/fusecalc.php?chip=attiny85"> this calculter</a> to generate my fuse bits values. This website you can save your setting as a perma-link so you can comeback to it! Link for my setting is <a href="http://eleccelerator.com/fusecalc/fusecalc.php?chip=attiny85&amp;LOW=62&amp;HIGH=DF&amp;EXTENDED=FF&amp;LOCKBIT=FF"> Here</a></p>
+
+<p>Only thing that is important in my setting is here</p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/fuse.png" />
+</div>
+
+<p>Basically my setting is intirely a default setting when you select attiny85 in a dropdown menu. You can select a clock setting from the dropdown menu to configure your AVR to run in defferent speed but it is important note there are internal clock and external clock. ATtiny has a internal clock that runs 8MHz on a default that everything is referensing. If you set to reference external clock, you have to have another component to keep time.
+Important thing here is that in the setting I have, section for “devide clock by 8 internally” is checked. This means that internal clock 8 Mhz is devided by 8 which is 1Mhz. This is why I have my CLOCK setting in the Makefile to 1000000 (1MHz).</p>
+
+<hr />
+
+<h2 id="b-make-flash-">B. make flash <a name="makeflash"></a></h2>
+
+<p>Now we are ready to send the code to the ATtiny! First I will make sure that process will work so I will try to send an empty example code to the chip. Main C code is stored in main.c file. From the terminal window cd into your directory of the firmware file of your project (wherever you have your project stored)</p>
+
+<ul>
+  <li>cd (your directory)</li>
+  <li>cd /Users/work/Documents/AVR/test/firmware</li>
+</ul>
+
+<p>Than you can type “make flash” to build the file and send them to the chip.</p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/makeflash.png" />
+</div>
+
+<p>If everyting goes well, 3 more files are created in the firmware folder</p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/firmwarefile.png" />
+</div>
+
+<p>As I understand, .o (object) file and .elm file is what my C code is being translated to and compiler does one more step of translation to create a .hex file which gets read by the AVR. <a href="https://ccrma.stanford.edu/~juanig/articles/wiriavrlib/AVR_GCC.html">Here</a> is a wright up on this.</p>
+
+<p>Here is what the .hex file of blink sketch looks like:</p>
+
+<pre>
+:100000000EC015C014C013C012C011C010C00FC064
+:100010000EC00DC00CC00BC00AC009C008C011241E
+:100020001FBECFE5D2E0DEBFCDBF02D018C0E8CF03
+:10003000BB9A88E088BB2FE936E891E02150304038
+:100040009040E1F700C0000018BA2FE936E891E0CF
+:10005000215030409040E1F700C00000EBCFF89411
+:02006000FFCFD0
+:00000001FF
+</pre>
+
+<p>From reading the feedback from AVRDUDE when I ran “make flash” command, we can see the steps of operation below,</p>
+
+<ul>
+  <li>1- avr-gcc translate the main.c file</li>
+  <li>2- check the size of the program</li>
+  <li>3- initilize the chip</li>
+  <li>4- erace the chip</li>
+  <li>5- reading main.hex file</li>
+  <li>6- write to the flash memory</li>
+  <li>7- varify the data written</li>
+  <li>8- done.  thank you.  (bow)</li>
+</ul>
+
+<p>Now we can move on to actually writing a code!</p>
+
+<hr />
+
+<h2 id="c-code-">C. Code <a name="code"></a></h2>
+
+<p>The structure of code for microcontrollers is described in a book as this:</p>
+
+<pre>
+
+[preamble &amp; includes]
+[possibly some function definitions]
+int main(void){
+	[chip initializations]
+	while(1) { [event loop]
+		[do this stuff forever]
+	}
+}
+
+</pre>
+
+<p>This is pretty similar to the structure for programming arduino. Code runs from top to buttom and there are part that runs once when the chip is turned on and there is a loop that keeps on looping as long as the chip is powered. Here is a image of the structure to visualize this structure.</p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/code_structure.png" />
+</div>
+
+<p>I really wish there is a way to color sections of code so it is easier to see and concepturalize them as a structure.</p>
+
+<p><mark>Comment, preamble, include</mark> section is for managing things like dependencies for library or globabl variables and other tools we need to include. It is a reference for the compiler to output the machine code. So this part of code (as I understand) is not going to be stored on the AVR chip itself.</p>
+
+<p><mark>Functions</mark> is a sets of operation as a unit you can call in a main loop of the code. It is a way to modulary build your code and make it flexile and organized.</p>
+
+<p><mark>main()</mark></p>
+
+<p><mark>Chip initialization</mark> - this is a section that runs once whent the chip is powered. Mainly it configures different pins and prepare the chip for the kind of task we are about to do. It is like a taking out some tools on your workbench and getting ready for a things you want to make.</p>
+
+<p><mark>while(1) loop</mark></p>
+
+<p><mark>main loop</mark> - This is where the action happens. Whatever in here will continually loop after chip initialization and until there is no power.</p>
+
+<p>And here is the first blinking LED sketch</p>
+
+<div class="gist">
+<script src="https://gist-it.appspot.com/github.com/lucasharoldsen/AVR/blob/master/1_digitalOutput_bitTwidling/blink/firmware/main.c"></script>
+</div>
+
+<hr />
+
+<h2 id="d-ddrb-and-portb-">D. DDRB and PORTB <a name="ddrbandportb"></a></h2>
+
+<p>It took me a little bit to concepturalize the relationship between physical pins on the chips, ports and idea of registers. Here are some key points. It was easier for me to think about these concepts on a ATmega328p chip since it had more than a one banks.</p>
+
+<h3 id="bank-of-pins">Bank of Pins</h3>
+<p>On microcontrollers there are “banks of pins” (ex. PORTB, PORTC, PORTD) they are group of pins in 8 (not always) that have a name like PB0 ~ PB7 (PB0 being first pin in PORTB and PB7 being 8th pin on the PORTB) These pins are physically located in a chip. For instance, on ATmega328p</p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/bank_atmega328.png" />
+</div>
+
+<p>you can see that banks of pins are placed on different location of pins. So here PB2 is located on pin 16 on the chip. In a code you refer to PB2 to use the pin. In ATtiny85, the package is so small that we only have one bank of pins PORTB. PB2 is located on pin 7 on ATtiny85.</p>
+
+<div class="dataimage2">
+	<img src="/assets/img/resource/attiny85/pinout_portb.png" />
+</div>
+
+<h3 id="ddrb-data-direction-register-bank-b">DDRB (Data Direction Register Bank B)</h3>
+
+<p>DDRB was in the example code above in the initialization section. This is short for Data Direction Register Bank B. So if you were trying to use bank C it would be DDRC. In a CPU of microcontroller there are place called registers where small amounts of space of memory is dedicated for configuring the body or conducting a specific operation. Data Direction Register is a reister in a microcontroller that can configure the specified pins to be used for INPUT or OUTPUT. By the default, they are configured to be INPUT to to use them as an output, we have to tell microcontroller that we want to do so.</p>
+
+<p>It is just like pinMode() in Arduino code. We are preparing the pin we are about to use.</p>
+
+<p>The way to set a bit in a register is a another conceptural leap but fascinating. First if we look at the datasheet of ATtiny85, we can find Register Description on page 64. Here we can find which bit correspond to which pin of the bank. There are 8 bit on a register and each bit is turned high and low with transistors. By writing high of the corresponding redister bit, we can configure specific pin for the output.</p>
+
+<pre>
+DDRB
+
+ bit7  bit6  bit5  bit4  bit3  bit2  bit1  bit0 
+
+| PB7 | PB6 | PB5 | PB4 | PB3 | PB2 | PB1 | PB0 |
+
+</pre>
+
+<p>So if we want to configure PB3 (pin 7 on a chip) to the output, we can write,</p>
+
+<pre>DDRB = 0b00001000</pre>
+
+<p>First 0b indicates that what follows is a binary number, and 00001000 is what we write. We are writing High (1) to the 4th bit from the right (bit3, PB3) mirroing the register description above. One thing to note here is that because we are writing whole 8 bit to the register, we are also writing low on all the other pins. It is fine for this project since we are only using one pin but as proect gets more complicated we need a way to flip the bit we want with out disturbing other bits.</p>
+
+<p><a href="http://www.rjhcoding.com/avrc-bit-manip.php">Here is a great article on bit manipulation</a></p>
+
+<p>Instead of writing whole 8 bit, I shifted the bit in using OR operation.</p>
+
+<pre>
+DDRB = 0b00001000  
+
+becomes,
+
+DDRB |= (1 &lt;&lt; PB3)
+</pre>
+
+<h3 id="portb-port-b-data-register">PORTB (Port B Data Register)</h3>
+
+<p>Now that we have configured our pin for output, we can send the voltage out by writing to PORTB. It works in a same way as DDRB that we can just write a bit high for the corresponding pin we are using.</p>
+
+<pre>
+PORTB |= (1 &lt;&lt; PB3) // same as PORTB = 0b00001000
+</pre>
+
+<p>This turns PB3 high.</p>
+
+<pre>
+PORTB &amp;= ~(1 &lt;&lt; PB3) 
+</pre>
+
+<p>And this turns the bit off.</p>
+
+<p><a href="https://www.instructables.com/id/ATTiny-Port-Manipulation/">Here is more in depth article on port manipulation</a></p>
+
+<hr />
+
+<h2 id="e-conclusion-">E. Conclusion <a name="conclusion"></a></h2>
+
+<p>Up to this point code structure and idea somewhat resemble Arduino structure I know. I can see how things are packaged to be more legible and clearer. Although, undrstanding register and writing to the register really make the programming alot closer to the feeling of physically turning transistor in the microcontroller on and off. Way microcontroller deals with bit manipulation make the process feel alot more granural.</p>
+
+:ET

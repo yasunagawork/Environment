@@ -1,0 +1,55 @@
+I"�<hr />
+<h2 id="references">References</h2>
+
+<ul>
+  <li>
+    <p><a href="http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-2586-AVR-8-bit-Microcontroller-ATtiny25-ATtiny45-ATtiny85_Datasheet.pdf">ATtiny85 datasheet</a></p>
+  </li>
+  <li>
+    <p><a href="http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega48_88_168_megaAVR-Data-Sheet-40002074.pdf">ATmega328p datasheet</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.nongnu.org/avr-libc/user-manual/index.html">Standard C AVR library reference</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/hexagon5un/AVR-Programming">Sample Code from a book “Make: AVR Programming”</a></p>
+  </li>
+  <li>
+    <p><a href="https://github.com/lucasharoldsen/AVR">My codes that I worked on</a></p>
+  </li>
+</ul>
+
+<h2 id="articles">Articles</h2>
+
+<ul>
+  <li>
+    <p><a href="https://www.instructables.com/member/myless8/">Great Instructable Article on port manipulation</a></p>
+  </li>
+  <li>
+    <p><a href="http://lorre-mill.com/2019/06/27/Memory-Devices.html">Thoughts on Memory Devices by Lorre Mill</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.arxterra.com/classes/intro-to-arduino-assembly/class-lectures/">Great Class from ARXTERRA - telerobotic community</a></p>
+  </li>
+  <li>
+    <p><a href="https://www.ladyada.net/learn/avr/index.html">Old AVR tutorial from ladyada.net</a></p>
+  </li>
+</ul>
+
+<h2 id="projects">Projects</h2>
+
+<ul>
+  <li>
+    <p><a href="http://www.technoblogy.com/show?V15">AVR Projects at technology.com</a></p>
+  </li>
+  <li>
+    <p><a href="http://elm-chan.org/">Inspiring elm-chan</a></p>
+  </li>
+  <li>
+    <p><a href="http://elm-chan.org/works/sd8p/report.html">elm-chan SD card project</a></p>
+  </li>
+</ul>
+
+<h2 id="tools">Tools</h2>
+
+:ET
